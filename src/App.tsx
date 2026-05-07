@@ -6,10 +6,13 @@ import { Good } from './types/Good';
 
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <div className="App">
       <h1>Dynamic list of Goods</h1>
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <button
         type="button"
@@ -17,7 +20,9 @@ export const App: React.FC = () => {
         onClick={() => {
           getAll()
             .then(setGoods)
-            .catch(() => {});
+            .catch(() => {
+              setError('Something went wrong');
+            });
         }}
       >
         Load all goods
@@ -29,7 +34,9 @@ export const App: React.FC = () => {
         onClick={() => {
           get5First()
             .then(setGoods)
-            .catch(() => {});
+            .catch(() => {
+              setError('Something went wrong');
+            });
         }}
       >
         Load 5 first goods
@@ -41,7 +48,9 @@ export const App: React.FC = () => {
         onClick={() => {
           getRedGoods()
             .then(setGoods)
-            .catch(() => {});
+            .catch(() => {
+              setError('Something went wrong');
+            });
         }}
       >
         Load red goods
